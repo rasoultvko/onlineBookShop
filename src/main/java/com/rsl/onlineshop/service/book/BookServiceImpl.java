@@ -26,6 +26,12 @@ public class BookServiceImpl implements BookService{
 
     }
 
+    public Book findByIdBook (Long id){
+        Book book = bookRepository.findById(id)
+                .orElseThrow(()-> new RuleException("book.not.exist"));
+        return book;
+    }
+
     private Book createBook (BookRequest bookRequest){
       return   Book.builder()
                 .name(bookRequest.getName())
