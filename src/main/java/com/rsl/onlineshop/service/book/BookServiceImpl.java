@@ -7,6 +7,7 @@ import com.rsl.onlineshop.model.Book;
 import com.rsl.onlineshop.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.Optional;
@@ -30,6 +31,14 @@ public class BookServiceImpl implements BookService{
         Book book = bookRepository.findById(id)
                 .orElseThrow(()-> new RuleException("book.not.exist"));
         return book;
+    }
+
+    @Override
+    @Transactional
+    public void deleted(Long id) {
+       Book book = findByIdBook(id);
+       bookRepository.delete(book);
+
     }
 
     private Book createBook (BookRequest bookRequest){

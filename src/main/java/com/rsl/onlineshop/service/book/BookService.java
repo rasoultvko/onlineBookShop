@@ -11,4 +11,6 @@ public interface BookService {
     BookResponse save (BookRequest bookRequest);
 
     Book findByIdBook(Long id);
+
+    void deleted (Long id);
 }
